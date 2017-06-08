@@ -1,0 +1,11 @@
+name: contributions
+title: contributions
+account: rkahne
+server: shinyapps.io
+appId: 185809
+bundleId: 852102
+url: https://rkahne.shinyapps.io/contributions/
+when: 1496527623.05004
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: contributions.R|contributions_2014.csv|contributions_2015.csv|contributions_2016.csv|contributions_2016.txt|contributions_2017.csv|data_setup.R|KREF_Contributions_2014_2017.csv|no_office_sought_2014_2017.csv|pac_list.csv|pac_list.pdf

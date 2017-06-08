@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(tidyverse)\nlibrary(anytime)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(scales)\nlibrary(zoo)\nlibrary(treemap)\nlibrary(forcats)\n\ncontributions <- read_delim('contributions_janjun2014.txt', delim = ';', col_names = F) %>% \n  rbind(read_delim('contributions_juldec2014.txt', delim = ';', col_names = F)) %>% \n  rbind(read_delim('contributions_janjun2015.txt', delim = ';', col_names = F)) %>% \n  rbind(read_delim('contributions_juldec2015.txt', delim = ';', col_names = F)) %>%\n  rbind(read_delim('contributions_janjun2016.txt', delim = ';', col_names = F)) %>%  \n  rbind(read_delim('contributions_juldec2016.txt', delim = ';', col_names = F)) %>% \n  rbind(read_delim('contributions_full2017.txt', delim = ';', col_names = F)) %>% \n  filter(X1 != 'BCF', X13 != 'TOTAL', X13 != 'IN-KIND RECD TOTAL')\n\nnames(contributions)<-c('Transaction Type','Election Date','Office Sought','Location of Office','Name Prefix','Last Name','First Name','Middle Name','Name Suffix','Party Affiliation','Report Due Date','Statement Type','Name','Address1','Address 2','City','State','Zip','Transaction Category','Form of Transaction','Occupation','Employer','Congressional District','Transaction Amount','Date of Transaction',\"Spouse's Name\",\"Spouse's Occupation\",\"Spouse's Employer\",'Organization Name','N/A','Transaction Mode')\n# write_csv(contributions, 'KREF_Contributions_2014_2017.csv')\n\n## PARSER ABOVE SAVES FILES WITH ';' IN PLACES.  NEED TO MANUALLY FIX IN NOTEPAD++ OR ANOTHER TEXT EDITOR. ##\n\ncontributions <- read_csv('KREF_Contributions_2014_2017.csv') %>% \n  filter(!is.na(`Election Date`))  %>% \n  mutate(\n    full_name = pmap_chr(list(`First Name`, `Middle Name`, `Last Name`), function(first,middle,last){\n      if(is.na(middle)) paste(first, last)\n      else paste(first, middle, last)\n    }),\n    `Election Date` = anytime(`Election Date`),\n    election_type = map_chr(`Election Date`, function(i){\n      mon <- month(i)\n      if(mon == 5) 'Primary'\n      else if(mon == 11) 'General'\n      else 'Special'\n    }),\n    election_year = year(`Election Date`)\n  ) \n\nwrite_csv(contributions, 'contribution_data_for_app.csv')\n",
+    "created" : 1496433906847.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3799666406",
+    "id" : "D85427A1",
+    "lastKnownWriteTime" : 1496508504,
+    "last_content_update" : 1496508504703,
+    "path" : "C:/Users/rkahn/Google Drive/R/contributions/data_setup.R",
+    "project_path" : "data_setup.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

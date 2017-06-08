@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(tidyverse)\nlibrary(forcats)\n\ncontributions <- read_csv('contribution_data_for_app.csv')\n\ncontributions %>% \n  filter(election_year > 2013,\n         `Location of Office` != 'STATEWIDE',\n         `Office Sought` != 'UNAUTHORIZED CAMPAIGN COMMITTEE') %>% \n  group_by(election_year, `Office Sought`, full_name) %>% \n  summarize(total_raised = sum(`Transaction Amount`, na.rm = T)) %>% \n  ungroup() %>% \n  group_by(election_year, `Office Sought`) %>% \n  summarize(mean_raised = mean(total_raised),\n            median_raised = median(total_raised),\n            num_candidates = n()) %>%\n  mutate(x_axis = paste0(`Office Sought`,'-',election_year,' (n=',num_candidates,')')) %>% \n  ggplot(aes(x = fct_reorder(x_axis,median_raised), y = median_raised)) +\n  geom_bar(stat = 'identity') +\n  # scale_x_continuous(labels = dollar_format()) +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 90))\n",
+    "created" : 1496526920936.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "237162230",
+    "id" : "D72ADBC2",
+    "lastKnownWriteTime" : 32088439404888165,
+    "last_content_update" : 1496530576456,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

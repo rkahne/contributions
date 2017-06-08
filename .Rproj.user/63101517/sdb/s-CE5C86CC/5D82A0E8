@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1496434373468.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "5D82A0E8",
+    "lastKnownWriteTime" : 7596484193276666483,
+    "last_content_update" : 1496434373468,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "CB9487CB",
+        "caption" : "contributions",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=contributions&cache_key=CB9487CB",
+        "displayedObservations" : 54350,
+        "environment" : "",
+        "object" : "contributions",
+        "preview" : 0,
+        "totalObservations" : 54350,
+        "variables" : 31
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
